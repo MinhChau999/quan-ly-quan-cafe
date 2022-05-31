@@ -94,7 +94,6 @@
             this.txbPassword.TabIndex = 1;
             this.txbPassword.Text = "1";
             this.txbPassword.UseSystemPasswordChar = true;
-            this.txbPassword.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label2
             // 
@@ -126,7 +125,6 @@
             this.txbUserName.Size = new System.Drawing.Size(311, 30);
             this.txbUserName.TabIndex = 1;
             this.txbUserName.Text = "k9";
-            this.txbUserName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -153,7 +151,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng nhập";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Login_FormClosing);
-            this.Load += new System.EventHandler(this.textBox2_TextChanged);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

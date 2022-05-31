@@ -1,4 +1,5 @@
 ﻿using quanLyQuanCafe.DAO;
+using quanLyQuanCafe.DTO;
 
 namespace quanLyQuanCafe
 {
@@ -7,16 +8,6 @@ namespace quanLyQuanCafe
         public Login()
         {
             InitializeComponent();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
 
@@ -34,7 +25,8 @@ namespace quanLyQuanCafe
             string password = txbPassword.Text;
             if (login(userName, password))
             {
-                TableManager f = new TableManager();
+                Account loginAccount = AccountDAO.Instance.GetAccoutByUserName(userName);
+                TableManager f = new TableManager(loginAccount);
                 this.Hide();
                 f.ShowDialog();
                 this.Show();
