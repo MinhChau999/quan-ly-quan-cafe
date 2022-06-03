@@ -40,11 +40,11 @@
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.txbDiscount = new System.Windows.Forms.TextBox();
             this.txbTotalPrice = new System.Windows.Forms.TextBox();
             this.cbSwitchTable = new System.Windows.Forms.ComboBox();
             this.btnSwitchTable = new System.Windows.Forms.Button();
             this.nmDiscount = new System.Windows.Forms.NumericUpDown();
-            this.btnDiscount = new System.Windows.Forms.Button();
             this.btnCheckOut = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.nmFoodCount = new System.Windows.Forms.NumericUpDown();
@@ -150,21 +150,30 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.txbDiscount);
             this.panel3.Controls.Add(this.txbTotalPrice);
             this.panel3.Controls.Add(this.cbSwitchTable);
             this.panel3.Controls.Add(this.btnSwitchTable);
             this.panel3.Controls.Add(this.nmDiscount);
-            this.panel3.Controls.Add(this.btnDiscount);
             this.panel3.Controls.Add(this.btnCheckOut);
             this.panel3.Location = new System.Drawing.Point(581, 457);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(449, 63);
             this.panel3.TabIndex = 3;
             // 
+            // txbDiscount
+            // 
+            this.txbDiscount.Location = new System.Drawing.Point(216, 31);
+            this.txbDiscount.Name = "txbDiscount";
+            this.txbDiscount.ReadOnly = true;
+            this.txbDiscount.Size = new System.Drawing.Size(75, 27);
+            this.txbDiscount.TabIndex = 9;
+            this.txbDiscount.Text = "Giảm giá";
+            // 
             // txbTotalPrice
             // 
             this.txbTotalPrice.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.txbTotalPrice.Location = new System.Drawing.Point(216, 20);
+            this.txbTotalPrice.Location = new System.Drawing.Point(216, 3);
             this.txbTotalPrice.Name = "txbTotalPrice";
             this.txbTotalPrice.ReadOnly = true;
             this.txbTotalPrice.Size = new System.Drawing.Size(132, 27);
@@ -192,20 +201,11 @@
             // 
             // nmDiscount
             // 
-            this.nmDiscount.Location = new System.Drawing.Point(103, 31);
+            this.nmDiscount.Location = new System.Drawing.Point(288, 31);
             this.nmDiscount.Name = "nmDiscount";
-            this.nmDiscount.Size = new System.Drawing.Size(107, 27);
+            this.nmDiscount.Size = new System.Drawing.Size(60, 27);
             this.nmDiscount.TabIndex = 5;
             this.nmDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // btnDiscount
-            // 
-            this.btnDiscount.Location = new System.Drawing.Point(103, 0);
-            this.btnDiscount.Name = "btnDiscount";
-            this.btnDiscount.Size = new System.Drawing.Size(107, 31);
-            this.btnDiscount.TabIndex = 4;
-            this.btnDiscount.Text = "Giảm giá";
-            this.btnDiscount.UseVisualStyleBackColor = true;
             // 
             // btnCheckOut
             // 
@@ -325,7 +325,6 @@
         private NumericUpDown nmFoodCount;
         private FlowLayoutPanel flpTable;
         private NumericUpDown nmDiscount;
-        private Button btnDiscount;
         private ComboBox cbSwitchTable;
         private Button btnSwitchTable;
         private ColumnHeader columnHeader1;
@@ -333,5 +332,6 @@
         private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
         private TextBox txbTotalPrice;
+        private TextBox txbDiscount;
     }
 }

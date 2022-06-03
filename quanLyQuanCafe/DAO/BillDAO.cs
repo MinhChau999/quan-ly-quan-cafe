@@ -49,6 +49,12 @@ namespace quanLyQuanCafe.DAO
             DataProvider.Instance.ExecuteNonQuery("exec dbo.USP_InsertBill @idTable", new object[] {id});
         }
 
+        public void DeleteBillByTableID(int id)
+        {
+            BillInfoDAO.Instance.DeleteBillInfoByTableID(id);
+            DataProvider.Instance.ExecuteQuery("delete Bill where idTable = " + id);
+        }
+
         public DataTable GetBillListByDate(DateTime checkIn, DateTime checkOut)
         {
             return DataProvider.Instance.ExecuteQuery("exec USP_GetListBillByDate @checkIn , @checkOut", new object[]{checkIn, checkOut});

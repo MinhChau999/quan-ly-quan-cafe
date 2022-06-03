@@ -41,6 +41,25 @@ namespace quanLyQuanCafe.DAO
         {
             DataProvider.Instance.ExecuteQuery("USP_SwitchTabel @idTable1 , @idTabel2", new object[] { id1, id2 });
         }
+        public bool InsertTable(string name)
+        {
+            string query = string.Format("insert dbo.TableFood (name) values (N'{0}')", name);
+            int data = DataProvider.Instance.ExecuteNonQuery(query);
+            return data > 0;
+        }
+        public bool UpdateTable(int id, string name)
+        {
+            string query = string.Format("update dbo.TableFood set name = N'{0}' where id = {1}", name, id);
+            int data = DataProvider.Instance.ExecuteNonQuery(query);
+            return data > 0;
+        }
 
+        public bool DeleteTable(int id)
+        {
+            BillDAO.Instance.DeleteBillByTableID(id);
+            string query = string.Format("delete dbo.TableFood where id = {0}", id);
+            int data = DataProvider.Instance.ExecuteNonQuery(query);
+            return data > 0;
+        }
     }
 }

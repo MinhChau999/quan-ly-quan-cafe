@@ -1,4 +1,4 @@
-﻿  create database QuanLyQuanCafe
+﻿create database QuanLyQuanCafe
 go
 
 use QuanLyQuanCafe
@@ -24,7 +24,7 @@ create  table Account
 (
 	Username nvarchar(100) primary key,
 	DisplayName nvarchar(100) not null default N'Kter',
-	Password nvarchar(250) not null,
+	Password nvarchar(250) not null default N'20720532132149213101239102231223249249135100218',
 	Type int default 0 --1:admin && 0:staff
 )
 go
@@ -55,7 +55,9 @@ create table Bill
 	DateCheckIn date not null,
 	DateCheckOut date,
 	idTable int not null,
-	Status int not null, --1:đã thanh toán, 0 chưa thanh toán
+	Status int not null default 0, --1:đã thanh toán, 0 chưa thanh toán
+	discount int default 0,
+	totalPrice float default 0,
 	foreign key (idTable) references TableFood(id)
 )
 go
@@ -80,7 +82,7 @@ INSERT INTO dbo.Account
         )
 VALUES  ( N'K9' , -- UserName - nvarchar(100)
           N'RongK9' , -- DisplayName - nvarchar(100)
-          N'1' , -- PassWord - nvarchar(1000)
+          N'1962026656160185351301320480154111117132155' , -- PassWord - nvarchar(1000)
           1  -- Type - int
         )
 INSERT INTO dbo.Account
@@ -91,7 +93,7 @@ INSERT INTO dbo.Account
         )
 VALUES  ( N'staff' , -- UserName - nvarchar(100)
           N'staff' , -- DisplayName - nvarchar(100)
-          N'1' , -- PassWord - nvarchar(1000)
+          N'1962026656160185351301320480154111117132155' , -- PassWord - nvarchar(1000)
           0  -- Type - int
         )
 GO
@@ -102,9 +104,6 @@ BEGIN
 	SELECT * FROM dbo.Account
 END
 GO
-
-select * from Account where Username = N'K9' and Password = N'1'
-go
 
 create proc USP_Login
 @userName nvarchar(100), @password nvarchar(100)
@@ -125,9 +124,6 @@ go
 
 create proc USP_GetTableList
 as select * from TableFood
-go
-
-update dbo.TableFood set status =N'Có nngười' where id=9
 go
 
 -- thêm category
@@ -172,101 +168,9 @@ VALUES  ( N'7Up', 5, 15000)
 INSERT dbo.Food
         ( name, idCategory, price )
 VALUES  ( N'Cafe', 5, 12000)
-
--- thêm bill
-INSERT	dbo.Bill
-        ( DateCheckIn ,
-          DateCheckOut ,
-          idTable ,
-          status
-        )
-VALUES  ( GETDATE() , -- DateCheckIn - date
-          NULL , -- DateCheckOut - date
-          3 , -- idTable - int
-          0  -- status - int
-        )
-        
-INSERT	dbo.Bill
-        ( DateCheckIn ,
-          DateCheckOut ,
-          idTable ,
-          status
-        )
-VALUES  ( GETDATE() , -- DateCheckIn - date
-          NULL , -- DateCheckOut - date
-          4, -- idTable - int
-          0  -- status - int
-        )
-INSERT	dbo.Bill
-        ( DateCheckIn ,
-          DateCheckOut ,
-          idTable ,
-          status
-        )
-VALUES  ( GETDATE() , -- DateCheckIn - date
-          GETDATE() , -- DateCheckOut - date
-          5 , -- idTable - int
-          1  -- status - int
-        )
-
--- thêm bill info
-INSERT	dbo.BillInfor
-        ( idBill, idFood, count )
-VALUES  ( 1, -- idBill - int
-          1, -- idFood - int
-          2  -- count - int
-          )
-INSERT	dbo.BillInfor
-        ( idBill, idFood, count )
-VALUES  ( 1, -- idBill - int
-          3, -- idFood - int
-          4  -- count - int
-          )
-INSERT	dbo.BillInfor
-        ( idBill, idFood, count )
-VALUES  ( 1, -- idBill - int
-          5, -- idFood - int
-          1  -- count - int
-          )
-INSERT	dbo.BillInfor
-        ( idBill, idFood, count )
-VALUES  ( 2, -- idBill - int
-          1, -- idFood - int
-          2  -- count - int
-          )
-INSERT	dbo.BillInfor
-        ( idBill, idFood, count )
-VALUES  ( 2, -- idBill - int
-          6, -- idFood - int
-          2  -- count - int
-          )
-INSERT	dbo.BillInfor
-        ( idBill, idFood, count )
-VALUES  ( 3, -- idBill - int
-          5, -- idFood - int
-          2  -- count - int
-          )         
-          
-GO
-
-select * from dbo.BillInfor
-select * from dbo.Bill
-GO
-
-select * from Bill where idTable = 3 and Status = 0
-
-select * from BillInfor where idBill = 2
-GO
-
-select f.name, bi.count,f.price, f.price*bi.count as totalPrice from BillInfor as bi
-join Bill as b on bi.idBill = b.id
-join Food as f on bi.idFood = f.id
-where b.idTable = 3 and b.Status = 0
 go
 
-delete dbo.BillInfor
-delete dbo.Bill
-go
+
 
 create proc USP_InsertBill  
 @idTable int
@@ -290,7 +194,7 @@ begin
 end
 go
 
-alter proc USP_InsertBillInfo
+create proc USP_InsertBillInfo
 @idBill int, @idFood int, @count int
 as
 begin
@@ -321,10 +225,7 @@ end
 go
 
 
-update dbo.Bill set DateCheckOut = GETDATE(), status = 1 where id = 1
-go
-
-alter TRIGGER UTG_UpdateBillInfo
+create TRIGGER UTG_UpdateBillInfo
 ON dbo.BillInfor FOR INSERT, UPDATE
 AS
 BEGIN
@@ -383,16 +284,8 @@ begin
 end
 go
 
-alter table dbo.bill
-add CONSTRAINT df_discount
-DEFAULT 0 for discount
 
-update Bill set discount = 0
-
-
-
-
-alter PROC USP_SwitchTabel
+create PROC USP_SwitchTabel
 @idTable1 INT, @idTable2 int
 AS BEGIN
 
@@ -467,14 +360,6 @@ AS BEGIN
 END
 GO  
 
-alter table bill
-add totalPrice float default 0
-go
-
-delete dbo.Bill
-select * from bill
-go
-
 create proc USP_GetListBillByDate
 @checkIn date, @checkOut date
 as
@@ -486,7 +371,7 @@ end
 go
 
 create proc USP_UpdateAccount
-@userName nvarchar(100), @displayName nvarchar(100), @password nvarchar(100), @newPassword nvarchar(100)
+@userName nvarchar(100),@displayName nvarchar(100), @password nvarchar(100), @newPassword nvarchar(100)
 as
 begin
 	declare @isRigthPass int = 0
@@ -505,3 +390,28 @@ begin
 	end
 end
 go
+
+CREATE TRIGGER UTG_DeleteBillInfo
+ON dbo.BillInfor FOR DELETE
+AS 
+BEGIN
+	DECLARE @idBillInfo INT
+	DECLARE @idBill INT
+	SELECT @idBillInfo = id, @idBill = Deleted.idBill FROM Deleted
+	
+	DECLARE @idTable INT
+	SELECT @idTable = idTable FROM dbo.Bill WHERE id = @idBill
+	
+	DECLARE @count INT = 0
+	
+	SELECT @count = COUNT(*) FROM dbo.BillInfor AS bi join dbo.Bill AS b on b.id = bi.idBill where b.id = @idBill AND b.status = 0
+	
+	IF (@count = 0)
+		UPDATE dbo.TableFood SET status = N'Trống' WHERE id = @idTable
+END
+GO
+
+
+CREATE FUNCTION [dbo].[fuConvertToUnsign1] ( @strInput NVARCHAR(4000) ) RETURNS NVARCHAR(4000) AS BEGIN IF @strInput IS NULL RETURN @strInput IF @strInput = '' RETURN @strInput DECLARE @RT NVARCHAR(4000) DECLARE @SIGN_CHARS NCHAR(136) DECLARE @UNSIGN_CHARS NCHAR (136) SET @SIGN_CHARS = N'ăâđêôơưàảãạáằẳẵặắầẩẫậấèẻẽẹéềểễệế ìỉĩịíòỏõọóồổỗộốờởỡợớùủũụúừửữựứỳỷỹỵý ĂÂĐÊÔƠƯÀẢÃẠÁẰẲẴẶẮẦẨẪẬẤÈẺẼẸÉỀỂỄỆẾÌỈĨỊÍ ÒỎÕỌÓỒỔỖỘỐỜỞỠỢỚÙỦŨỤÚỪỬỮỰỨỲỶỸỴÝ' +NCHAR(272)+ NCHAR(208) SET @UNSIGN_CHARS = N'aadeoouaaaaaaaaaaaaaaaeeeeeeeeee iiiiiooooooooooooooouuuuuuuuuuyyyyy AADEOOUAAAAAAAAAAAAAAAEEEEEEEEEEIIIII OOOOOOOOOOOOOOOUUUUUUUUUUYYYYYDD' DECLARE @COUNTER int DECLARE @COUNTER1 int SET @COUNTER = 1 WHILE (@COUNTER <=LEN(@strInput)) BEGIN SET @COUNTER1 = 1 WHILE (@COUNTER1 <=LEN(@SIGN_CHARS)+1) BEGIN IF UNICODE(SUBSTRING(@SIGN_CHARS, @COUNTER1,1)) = UNICODE(SUBSTRING(@strInput,@COUNTER ,1) ) BEGIN IF @COUNTER=1 SET @strInput = SUBSTRING(@UNSIGN_CHARS, @COUNTER1,1) + SUBSTRING(@strInput, @COUNTER+1,LEN(@strInput)-1) ELSE SET @strInput = SUBSTRING(@strInput, 1, @COUNTER-1) +SUBSTRING(@UNSIGN_CHARS, @COUNTER1,1) + SUBSTRING(@strInput, @COUNTER+1,LEN(@strInput)- @COUNTER) BREAK END SET @COUNTER1 = @COUNTER1 +1 END SET @COUNTER = @COUNTER +1 END SET @strInput = replace(@strInput,' ','-') RETURN @strInput END
+go
+
