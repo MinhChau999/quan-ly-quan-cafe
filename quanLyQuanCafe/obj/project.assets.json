@@ -455,6 +455,7 @@
   },
   "packageFolders": {
     "C:\\Users\\dobby\\.nuget\\packages\\": {},
+    "D:\\Library\\MaterialDesignln\\Components\\Offline Packages": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
@@ -467,10 +468,12 @@
       "outputPath": "D:\\Workspace\\QuanLyQuanCafe\\QuanLyWinform\\quanLyQuanCafe\\quanLyQuanCafe\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "D:\\Library\\MaterialDesignln\\Components\\Offline Packages",
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
         "C:\\Users\\dobby\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -479,6 +482,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "D:\\Library\\MaterialDesignln\\Components\\System\\Components\\Packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -523,5 +527,61 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "The local source 'D:\\Library\\MaterialDesignln\\Components\\Offline Packages' doesn't exist.",
+      "libraryId": "System.Data.SqlClient"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "The local source 'D:\\Library\\MaterialDesignln\\Components\\Offline Packages' doesn't exist.",
+      "libraryId": "Microsoft.Win32.Registry"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "The local source 'D:\\Library\\MaterialDesignln\\Components\\Offline Packages' doesn't exist.",
+      "libraryId": "System.Security.AccessControl"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "The local source 'D:\\Library\\MaterialDesignln\\Components\\Offline Packages' doesn't exist.",
+      "libraryId": "Microsoft.NETCore.Platforms"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "The local source 'D:\\Library\\MaterialDesignln\\Components\\Offline Packages' doesn't exist.",
+      "libraryId": "runtime.native.System.Data.SqlClient.sni"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "The local source 'D:\\Library\\MaterialDesignln\\Components\\Offline Packages' doesn't exist.",
+      "libraryId": "runtime.win-arm64.runtime.native.System.Data.SqlClient.sni"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "The local source 'D:\\Library\\MaterialDesignln\\Components\\Offline Packages' doesn't exist.",
+      "libraryId": "runtime.win-x64.runtime.native.System.Data.SqlClient.sni"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "The local source 'D:\\Library\\MaterialDesignln\\Components\\Offline Packages' doesn't exist.",
+      "libraryId": "runtime.win-x86.runtime.native.System.Data.SqlClient.sni"
+    },
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "The local source 'D:\\Library\\MaterialDesignln\\Components\\Offline Packages' doesn't exist.",
+      "libraryId": "System.Security.Principal.Windows"
+    }
+  ]
 }

@@ -12,7 +12,11 @@ namespace quanLyQuanCafe.DAO
     {
         private static DataProvider instance; // Ctrl + R + E
 
-        private string conectionSTR = @"Data Source=DESKTOP-UK8RJR5\DOBBY;Initial Catalog=QuanLyQuanCafe;Integrated Security=True";
+        private string conectionSTR = @"Data Source=.\SQLEXPRESS;
+                                      AttachDbFilename=D:\CoffeeManament\QuanLyQuanCafe.mdf;
+                                      Integrated Security=True;
+                                      Connect Timeout=30;
+                                      User Instance=True";
 
         public static DataProvider Instance { 
             get { if (instance == null)  instance = new DataProvider(); return instance; }
